@@ -8,6 +8,8 @@ import JournalViewScreen from '../screens/JournalViewScreen';
 import CategorizationScreen from '../screens/CategorizationScreen';
 import SummaryViewScreen from '../screens/SummaryViewScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import MainAppScreen from '../screens/MainAppScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -22,6 +24,7 @@ const MainNavigator = () => {
         <Stack.Screen name="Categorization" component={CategorizationScreen} />
         <Stack.Screen name="SummaryView" component={SummaryViewScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="MainApp" component={MainAppScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

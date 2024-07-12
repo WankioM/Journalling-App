@@ -21,7 +21,7 @@ const SignUpScreen = ({ navigation }: { navigation: any }) => {
       navigation.navigate('Login'); // Replace 'Login' with the screen you want to navigate to
     } catch (error) {
       console.error('Error signing up:', error);
-      Alert.alert('Sign Up Failed', 'Failed to sign up. Please try again.');
+      Alert.alert('Sign Up Failed', 'Failed to sign up. Please try again. `${error}`');
     }
   };
 
