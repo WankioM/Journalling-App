@@ -12,7 +12,7 @@ export const createUser = async (username: string, password: string): Promise<Us
   const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
   const values = [username, hashedPassword];
   return new Promise((resolve, reject) => {
-    pool.query(query, values, (error, results) => {
+    pool.query(query, values, (error: any, results: any) => {
       if (error) {
         reject(error);
       } else {
@@ -31,7 +31,7 @@ export const findUserByUsername = async (username: string): Promise<User | null>
   const query = 'SELECT * FROM users WHERE username = ?';
   const values = [username];
   return new Promise((resolve, reject) => {
-    pool.query(query, values, (error, results) => {
+    pool.query(query, values, (error: any, results: any) => {
       if (error) {
         reject(error);
       } else {
