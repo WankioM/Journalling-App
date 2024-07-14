@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { response } from 'express';
 
 const JournalEntryScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
 
-  const handleSave = () => {
-    // Implement save functionality here
-    console.log('Title:', title);
-    console.log('Content:', content);
+  const handleSave = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@auth_token');
+      const response = await axios.post(
+        `${process.env.BACKEND_URL}/api/journal/add`,
+        { title, content, category },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('Journal entry added:', response.data);
+      // Optionally, navigate back or clear the form
+    } catch (error) {
+      console.log(`lets eat ${title}, ${content} , ${category}`)
+      console.error('Error saving journal entry:', error);
+      
+    }finally {
+      console.log('finally');
+      console.log(response);
+    }
   };
 
   return (
@@ -22,10 +44,10 @@ const JournalEntryScreen = () => {
       />
       <Text style={styles.label}>Content</Text>
       <TextInput
-        style={styles.input}
+        style={styles.contentinput}
         value={content}
         onChangeText={setContent}
-        placeholder="Enter content"
+        placeholder="..."
         multiline
       />
       <TouchableOpacity style={styles.button} onPress={handleSave}>
@@ -51,6 +73,14 @@ const styles = StyleSheet.create({
     borderColor: '#cccccc',
     padding: 10,
     marginBottom: 20,
+  },
+  contentinput: {
+    flex: 1, // Take up all available space
+    borderWidth: 1,
+    borderColor: '#cccccc',
+    padding: 10,
+    marginBottom: 20,
+    textAlignVertical: 'top', // Ensure text starts at the top
   },
   button: {
     backgroundColor: '#007bff',
