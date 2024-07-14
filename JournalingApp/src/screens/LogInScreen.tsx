@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {
@@ -19,6 +20,8 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
       const { token } = response.data;
 
       // Save the token securely (e.g., AsyncStorage for React Native)
+      await AsyncStorage.setItem('@auth_token', token);
+      
       // Navigate to the main app screen or do any other post-login actions
       Alert.alert('Success', 'Login successful');
       

@@ -1,18 +1,36 @@
-import React from 'react';
-import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const JournalEntryScreen = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const handleSave = () => {
+    // Implement save functionality here
+    console.log('Title:', title);
+    console.log('Content:', content);
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Journal Entry</Text>
-      <TextInput style={styles.input} placeholder="Title" />
+      <Text style={styles.label}>Title</Text>
       <TextInput
         style={styles.input}
-        placeholder="Content"
-        multiline
-        numberOfLines={4}
+        value={title}
+        onChangeText={setTitle}
+        placeholder="Enter title"
       />
-      <Button title="Save Entry" onPress={() => {}} />
+      <Text style={styles.label}>Content</Text>
+      <TextInput
+        style={styles.input}
+        value={content}
+        onChangeText={setContent}
+        placeholder="Enter content"
+        multiline
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSave}>
+        <Text style={styles.buttonText}>Save</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -20,20 +38,30 @@ const JournalEntryScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
+    padding: 20,
+    backgroundColor: '#ffffff',
   },
-  title: {
-    fontSize: 24,
+  label: {
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginVertical: 8,
-    borderRadius: 4,
+    borderColor: '#cccccc',
+    padding: 10,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#007bff',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 

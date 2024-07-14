@@ -1,7 +1,47 @@
-import React from 'react';
+import React , { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'; 
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../navigation/types';
+interface Props {
+  username: string;
+  entries: JournalEntry[]; // Adjust this type based on your actual data structure
+}
 
-const MainAppScreen = ({ username, entries }: { username: string; entries: any[] }) => {
+interface JournalEntry {
+  date: string;
+  title: string;
+  content: string;
+}
+
+const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) => {
+  const [username, setUsername] = useState(initialUsername);
+  const [userEntries, setUserEntries] = useState<JournalEntry[]>(entries);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = await AsyncStorage.getItem('@auth_token');
+        const storedUsername = await AsyncStorage.getItem('@auth_username');
+        setUsername(storedUsername || '');
+
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/user/entries`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUserEntries(response.data.entries);
+      } catch (error) {
+        console.error('Error fetching user entries:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <View style={styles.container}>
       {/* Top section with logo overlaying infographic */}
@@ -16,14 +56,14 @@ const MainAppScreen = ({ username, entries }: { username: string; entries: any[]
       <View style={styles.content}>
         <Text style={styles.greeting}>Hi {username},</Text>
         <Text style={styles.subText}>What's on your mind?</Text>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('JournalEntry')}>
           <Text style={styles.buttonText}>New Journal Entry</Text>
         </TouchableOpacity>
       </View>
 
       {/* Scrollable list of journal entries */}
       <ScrollView style={styles.entriesContainer}>
-        {entries.map((entry, index) => (
+        {userEntries.map((entry, index) => (
           <View key={index} style={styles.entry}>
             <Text style={styles.entryDate}>{entry.date}</Text>
             <Text style={styles.entryTitle}>{entry.title}</Text>
