@@ -15,13 +15,13 @@ const generateToken = (id: number) => {
 export const signup = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   try {
-    // Check if user already exists
+   
     const existingUser = await findUserByUsername(username);
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    // If user does not exist, proceed to create new user
+    // If user does not exist, create 
     const newUser = await createUser(username, password);
     const token = generateToken(newUser.id);
     res.status(201).json({ token });

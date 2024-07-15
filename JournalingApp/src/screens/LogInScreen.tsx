@@ -16,16 +16,16 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         password,
       });
 
-      // Assuming your backend responds with a token on successful login
+  
       const { token } = response.data;
 
-      // Save the token securely (e.g., AsyncStorage for React Native)
+
       await AsyncStorage.setItem('@auth_token', token);
       
-      // Navigate to the main app screen or do any other post-login actions
+ 
       Alert.alert('Success', 'Login successful');
       
-      // Example navigation to another screen
+    
       navigation.navigate('MainApp');
     } catch (error: any) {
       console.error('Error logging in:', error);
@@ -49,8 +49,12 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
         value={password}
         onChangeText={setPassword}
       />
+         <View style={styles.buttonContainer}>
       <Button title="Log In" onPress={handleLogin} />
+      </View>
+      <View style={styles.buttonContainer}>
       <Button title="Don't have an account? Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      </View>
     </View>
   );
 };
@@ -69,6 +73,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 4,
+  },
+  buttonContainer: {
+    margin: 8,
   },
 });
 

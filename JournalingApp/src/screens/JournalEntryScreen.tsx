@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { response } from 'express';
+
 
 const JournalEntryScreen = () => {
   const [title, setTitle] = useState('');
@@ -22,14 +22,11 @@ const JournalEntryScreen = () => {
         }
       );
       console.log('Journal entry added:', response.data);
-      // Optionally, navigate back or clear the form
+      
     } catch (error) {
       console.log(`lets eat ${title}, ${content} , ${category}`)
       console.error('Error saving journal entry:', error);
       
-    }finally {
-      console.log('finally');
-      console.log(response);
     }
   };
 

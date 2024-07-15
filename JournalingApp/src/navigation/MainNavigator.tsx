@@ -29,7 +29,7 @@ const MainNavigator = () => {
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen
           name="MainApp"
-          options={{ headerShown: false }} // Optional: Hide header if not needed
+          options={{ headerShown: false }} 
         >
           {props => (
             <MainAppScreen

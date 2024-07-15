@@ -44,15 +44,15 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
 
   return (
     <View style={styles.container}>
-      {/* Top section with logo overlaying infographic */}
+      
       <View style={styles.header}>
-        {/* Your logo component or image */}
+        
         <Text style={styles.logo}>Logo</Text>
-        {/* Infographic or other content */}
+       
         <Text style={styles.infographic}>Infographic</Text>
       </View>
 
-      {/* Greeting and new entry button */}
+  
       <View style={styles.content}>
         <Text style={styles.greeting}>Hi {username},</Text>
         <Text style={styles.subText}>What's on your mind?</Text>
@@ -61,7 +61,7 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
         </TouchableOpacity>
       </View>
 
-      {/* Scrollable list of journal entries */}
+   
       <ScrollView style={styles.entriesContainer}>
         {userEntries.map((entry, index) => (
           <View key={index} style={styles.entry}>
