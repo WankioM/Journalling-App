@@ -29,13 +29,15 @@ const JournalEntryScreen = () => {
       console.log('Journal entry added:', response.data);
 
       // Assuming you have the username and entries data available after save
-      const username = 'JohnDoe';
-      const entries = [
-        { date: '2023-07-11', title: 'Entry 1', content: 'Content 1' },
-        { date: '2023-07-12', title: 'Entry 2', content: 'Content 2' }
-      ];
-      navigation.navigate('MainApp', { username, entries });
-      
+      const username = await AsyncStorage.getItem('@auth_username');
+      const entriesResponse = await axios.get(`${process.env.BACKEND_URL}/api/journal/entries`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const entries = entriesResponse.data.entries;
+      navigation.navigate('MainApp', { username: username || '', entries });
+
       
     } catch (error) {
       console.log(`lets eat ${title}, ${content} , ${category}`)

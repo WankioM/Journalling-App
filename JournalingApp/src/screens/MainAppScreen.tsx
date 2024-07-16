@@ -27,7 +27,7 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
         const storedUsername = await AsyncStorage.getItem('@auth_username');
         setUsername(storedUsername || '');
 
-        const response = await axios.get(`${process.env.BACKEND_URL}/api/user/entries`, {
+        const response = await axios.get(`${process.env.BACKEND_URL}/api/journal/entries`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +65,7 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
       <ScrollView style={styles.entriesContainer}>
         {userEntries.map((entry, index) => (
           <View key={index} style={styles.entry}>
-            <Text style={styles.entryDate}>{entry.date}</Text>
+           
             <Text style={styles.entryTitle}>{entry.title}</Text>
             <Text style={styles.entryContent}>{entry.content}</Text>
           </View>

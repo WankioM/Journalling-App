@@ -21,6 +21,7 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
 
 
       await AsyncStorage.setItem('@auth_token', token);
+      await AsyncStorage.setItem('@auth_username', username);
       
  
       Alert.alert('Success', 'Login successful');
