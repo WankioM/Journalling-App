@@ -2,8 +2,9 @@ import React , { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'; 
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useNavigation, NavigationProp, useIsFocused } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
+
 interface Props {
   username: string;
   entries: JournalEntry[]; // Adjust this type based on your actual data structure
@@ -19,6 +20,7 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
   const [username, setUsername] = useState(initialUsername);
   const [userEntries, setUserEntries] = useState<JournalEntry[]>(entries);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -39,8 +41,10 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
       }
     };
 
-    fetchUserData();
-  }, []);
+    if (isFocused) {
+      fetchUserData();
+    }
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
