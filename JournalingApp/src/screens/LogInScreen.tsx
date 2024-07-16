@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     margin: 8,
+    backgroundColor: '#815355'
   },
 });
 

@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top', // Ensure text starts at the top
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#815355',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,

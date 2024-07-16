@@ -1,5 +1,5 @@
 import React , { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet , Image, Dimensions} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'; 
 import { useNavigation, NavigationProp, useIsFocused } from '@react-navigation/native';
@@ -50,10 +50,21 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
     <View style={styles.container}>
       
       <View style={styles.header}>
+
+      <View style={styles.logoContainer}>
         
-        <Text style={styles.logo}>Logo</Text>
+        <Image 
+          source={require('../../assets/s3.png')} 
+          style={styles.logo} 
+          resizeMode="contain" 
+        />
+        </View>
        
-        <Text style={styles.infographic}>Infographic</Text>
+        <Image 
+          source={require('../../assets/Meditation-amico.png')} 
+          style={styles.infographic} 
+          resizeMode="contain" 
+        />
       </View>
 
   
@@ -79,6 +90,8 @@ const MainAppScreen: React.FC<Props> = ({ username: initialUsername, entries }) 
   );
 };
 
+const screenWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -90,13 +103,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+    marginTop:20,
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 20,
+    zIndex: 1000,
   },
   logo: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    width: 60,  
+    height: 60, 
+    maxWidth: '100%',
   },
   infographic: {
-    fontSize: 18,
+    width: 400,  
+    height: 400, 
+    maxWidth: '100%',
   },
   content: {
     marginBottom: 20,
@@ -111,7 +134,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#815355',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
