@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use('/api/auth', authRoutes);
 
-app.use('/api/user', journalRoutes);
+app.use('/api/journal', journalRoutes);
 
 
 const PORT = process.env.PORT || 5000;
