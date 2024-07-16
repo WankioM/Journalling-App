@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../navigation/types';
 
+type MainAppScreenNavigationProp = StackNavigationProp<RootStackParamList, 'MainApp'>;
 
 const JournalEntryScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('');
+  const navigation = useNavigation<MainAppScreenNavigationProp>();
 
   const handleSave = async () => {
     try {
@@ -22,6 +27,15 @@ const JournalEntryScreen = () => {
         }
       );
       console.log('Journal entry added:', response.data);
+
+      // Assuming you have the username and entries data available after save
+      const username = 'JohnDoe';
+      const entries = [
+        { date: '2023-07-11', title: 'Entry 1', content: 'Content 1' },
+        { date: '2023-07-12', title: 'Entry 2', content: 'Content 2' }
+      ];
+      navigation.navigate('MainApp', { username, entries });
+      
       
     } catch (error) {
       console.log(`lets eat ${title}, ${content} , ${category}`)
@@ -39,6 +53,15 @@ const JournalEntryScreen = () => {
         onChangeText={setTitle}
         placeholder="Enter title"
       />
+
+      <Text style={styles.label}>Category</Text>
+      <TextInput
+        style={styles.input}
+        value={category}
+        onChangeText={setCategory}
+        placeholder="Enter title"
+      />
+
       <Text style={styles.label}>Content</Text>
       <TextInput
         style={styles.contentinput}
