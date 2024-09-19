@@ -1,6 +1,6 @@
 # Journaling App
 
-This project is a journaling app that allows users to sign up, log in, and create journal entries. The backend is powered by Node.js and Express, while the frontend is a React Native mobile app using Expo.
+This project is a journaling app designed with mental health in mind.It app allows users to sign up, log in, and create personal journal entries, providing a digital space for reflection and emotional release. The backend is powered by Node.js and Express, while the frontend is a React Native mobile app built using Expo, ensuring a seamless experience across devices. Whether it's daily reflections or processing difficult emotions, this app is here to support users on their mental health journey.
 
 ## Documentation
 
